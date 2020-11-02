@@ -24,7 +24,7 @@
                               </div>             
                     @endforeach
                     {!! $list->links()!!}
-                    @if(isset($user->id)&&isset($user->is_blacklist)&&$user->is_blacklist==0)
+                    @if($is_blacklist==0)
                     <div class="panel ">
                         <div class="contact-box text-center">
                             <form id="ajax-contact" action="/home/note" method="post">

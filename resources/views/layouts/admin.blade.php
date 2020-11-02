@@ -10,16 +10,18 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Scripts -->
+        <script  type="text/javascript" src="{{ asset('js/jquery-3.0.0.min.js') }}" ></script>        
         <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!--<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>-->
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-        <link href="https://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <!--<link href="https://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">-->
     </head>
     <body>
         <div id="app">
@@ -54,42 +56,42 @@
                         </ul>
 
                         @else
- <ul class="navbar-nav ml-auto" style="float: right">
-                        <li class="dropdown">
+                        <ul class="navbar-nav ml-auto" style="float: right">
+                            <li class="dropdown">
 
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
 
-                                {{ Auth::guard('admin')->user()->name }} 
+                                    {{ Auth::guard('admin')->user()->name }} 
 
-                            </a>
+                                </a>
 
-                            <ul class="dropdown-menu">
+                                <ul class="dropdown-menu">
 
-                                <li>
+                                    <li>
 
-                                    <a href="{{ route('admin.logout') }}"
+                                        <a href="{{ route('admin.logout') }}"
 
-                                       onclick="event.preventDefault();
+                                           onclick="event.preventDefault();
 
     document.getElementById('logout-form').submit();">
 
-                                        退出登录
+                                            退出登录
 
-                                    </a>
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
 
-                                        {{ csrf_field() }}
+                                            {{ csrf_field() }}
 
-                                    </form>
+                                        </form>
 
-                                </li>
+                                    </li>
 
-                            </ul>
+                                </ul>
 
-                        </li>
+                            </li>
 
-                        @endguest
+                            @endguest
 
                     </div>
                 </div>

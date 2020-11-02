@@ -20,17 +20,24 @@ class HomeController extends Controller {
     }
 
     /**
-     * Show the application dashboard.
-     *
+     * 
+     * 会员用户管理页面
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $userlist = DB::table('users')
+        $user_list = DB::table('users')
                 ->paginate(6);
-        return view('admin.usermanage', ['userlist' => $userlist]);
+        return view('admin.usermanage', ['userlist' => $user_list]);
     }
 
-    public function userAction(Request $request) {
+    /**
+     * 管理员对会员管理操作
+     * @param Request $request
+        *              uid              会员用户id
+        *              is_blacklist     0 解除黑名单  1 加入黑名单    
+     * @return type
+     */
+    public function userAction(Request $request):object {
         $data = $request->all();
         $rules = ['uid' => ['required', 'string'], 'is_blacklist' => ['required', 'string']];
         $request->validate($rules);

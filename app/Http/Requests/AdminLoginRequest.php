@@ -16,7 +16,7 @@ class AdminLoginRequest extends FormRequest {
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * 管理员登录必要字段名
      *
      * @return array
      */

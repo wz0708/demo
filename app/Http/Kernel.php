@@ -64,5 +64,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin.guest' => \App\Http\Middleware\RedirectIfAdminAuthenticated::class,
+        'checkblacklist'=>\App\Http\Middleware\CheckBlackList::class,
     ];
 }

@@ -25,6 +25,7 @@
                             <td>{{$val -> email}}</td>
                             <td>{{$val -> is_blacklist?'是':'否'}}</td>
                             <td><button data-uid="{{$val -> id}}" type="button" class="btn btn-primary btn-action  {{$val -> is_blacklist?'relieve':'ban'}}">{{$val -> is_blacklist?'移除黑名单':'加入黑名单'}}</button></td>
+                            
                         </tr>                        
                                    
                         @endforeach                    
@@ -47,15 +48,19 @@
     $(function () {
         $('.btn-action').on('click', function () {
             if ($(this).hasClass('ban')) {
-                var is_blacklist = 1;
+            var is_blacklist = 1;
             } else {
-                var is_blacklist = 0;
+            var is_blacklist = 0;
             }
-            var uid = $(this).data('uid');
+           
+                    var uid = $(this).data('uid');
             $.ajax({
                 type: "POST",
                 url: "{{ route('admin.useraction') }}",
                 dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
                 data: {
                     "uid": uid,
                     "is_blacklist": is_blacklist,

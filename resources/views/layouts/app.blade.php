@@ -10,16 +10,17 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Scripts -->
+        <script  type="text/javascript" src="{{ asset('js/jquery-3.0.0.min.js') }}" ></script>         
         <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+        <!--<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>-->
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-        <link href="https://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <!--<link href="https://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">-->
     </head>
     <body>
         <div id="app">

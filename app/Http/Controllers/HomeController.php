@@ -17,11 +17,11 @@ class HomeController extends Controller {
      * @return void
      */
     public function __construct() {
-        $this->middleware('auth')->except('index');
+        $this->middleware('checkblacklist');
     }
 
     /**
-     * Show the application dashboard.
+     * 首页  留言板页面
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -36,17 +36,17 @@ class HomeController extends Controller {
     }
 
     /**
-     * 登录用户   可以添加留言
+     * 登录用户  有权限用户   可以添加留言
      * @param Request $request
      */
-    public function note(Request $request) {
+    public function note(Request $request):object {
         $user = Auth::user();
         $data = $request->all();
         $rules = ['content' => ['required', 'string', 'max:1024']];
         $messages = ['content.max' => '留言最大限制1024字数'];
         $request->validate($rules, $messages);
-        $insert_data=['uid'=>$user->id,'content'=>$data['content'],'created_at'=>time()];
-        $res= DB::table('message')->insert($insert_data);       
+        $insert_data = ['uid' => $user->id, 'content' => $data['content'], 'created_at' => date('Y-m-d H:i:s')];
+        $res = DB::table('message')->insert($insert_data);
         return $request->wantsJson() ? new Response('', 204) : redirect('/');
     }
 
