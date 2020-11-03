@@ -15,7 +15,7 @@
                                       <span class="nickname" >留言者: {{$val -> name}}</span>
                                       <span >|</span>
                                       <span class="email" style="">邮箱:{{$val -> email}}</span>
-                                      <span class="time" style="float: right;">时间: {{timeHandle($val->created_at)}}</span>
+                                      <span class="time" style="float: right;">时间: {{$val->created_at_str}}</span>
                                     </div>
                                 <div class="panel-body">
                                       <span class="content">内容: {{$val -> content}}</span>
@@ -24,13 +24,13 @@
                               </div>             
                     @endforeach
                     {!! $list->links()!!}
-                    @if($is_blacklist==0)
+                    @if($is_blacklist == 0)
                     <div class="panel ">
                         <div class="contact-box text-center">
                             <form id="ajax-contact" action="/home/note" method="post">
 
                                 <div class="form-group"><textarea style="resize:none;" class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="10"
-                                                                   placeholder="留言内容长度最大1024*" required=""></textarea>
+                                                                  placeholder="留言内容长度最大1024*" required=""></textarea>
                                     @error('content')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

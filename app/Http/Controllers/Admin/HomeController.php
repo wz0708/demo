@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response;
+use App\Logic\AdminLogic;
 
 class HomeController extends Controller {
 
@@ -24,24 +25,23 @@ class HomeController extends Controller {
      * 会员用户管理页面
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $user_list = DB::table('users')
-                ->paginate(6);
-        return view('admin.usermanage', ['userlist' => $user_list]);
+    public function index(Request $request, AdminLogic $logic) {
+        $pager = $logic->handle()->paginate(6);
+        return view('admin.usermanage', ['userlist' => $pager]);
     }
 
     /**
      * 管理员对会员管理操作
      * @param Request $request
-        *              uid              会员用户id
-        *              is_blacklist     0 解除黑名单  1 加入黑名单    
+     *              uid              会员用户id
+     *              is_blacklist     0 解除黑名单  1 加入黑名单    
      * @return type
      */
-    public function userAction(Request $request):object {
+    public function userAction(Request $request, AdminLogic $logic):object {
         $data = $request->all();
         $rules = ['uid' => ['required', 'string'], 'is_blacklist' => ['required', 'string']];
         $request->validate($rules);
-        $res = DB::table('users')->where('id', $data['uid'])->update(['is_blacklist' => $data['is_blacklist']]);
+        $res = $logic->updateUsers(array_merge($data, ['action_user' => Auth::guard('admin')->user()->name]));
         if ($res) {
             return response()->json(['msg' => "修改数据成功", 'code' => 200]);
         } else {
