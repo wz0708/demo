@@ -6,13 +6,13 @@
  * return  $retrun   转换后的时间  比如1分钟前   2小时前
  */
 function timeHandle(string $time):string {
-    $message_time = strtotime($time);
+    $times = strtotime($time);
     $now = time();
-    $differ = $now - $message_time;
+    $differ = $now - $times;
     $return = '';
     if ($differ < (60 * 60)) {
-        $min_differ = floor($differ / 60);
-        if ($min_differ == 0) {
+        $minDiffer = floor($differ / 60);
+        if ($minDiffer == 0) {
             $return = '刚刚';
         } else {
             $return = floor($differ / 60) . '分钟前';

@@ -40,7 +40,7 @@ class UsersLogic {
      * @param array $data
      * @return type
      */
-    protected function validatorParams(array $data) {
+    protected function validatorParams(array $data):bool {
         if (!isset($data['uid'])) {
             $this->error = '用戶必须登录';
             return false;
@@ -58,14 +58,14 @@ class UsersLogic {
      * @param type $size
      * @return type
      */
-    public function handle(int $size) {
+    public function handle(int $size):object {
         //获取数据
         $model = Message::join('users', 'message.uid', '=', 'users.id')
                 ->select('message.*', 'users.name', 'users.email')
                 ->orderBy('message.id', 'desc')
                 ->paginate($size);
         foreach ($model as $key => $val) {//留言时间转换
-            $model[$key]->created_at_str = TimeFormatService::timestampToStr($model[$key]->created_at);
+            $model[$key]->createdAtStr = TimeFormatService::timestampToStr($model[$key]->created_at);
         }
         return $model;
     }

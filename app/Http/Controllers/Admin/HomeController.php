@@ -27,7 +27,7 @@ class HomeController extends Controller {
      */
     public function index(Request $request, AdminLogic $logic) {
         $pager = $logic->handle()->paginate(6);
-        return view('admin.usermanage', ['userlist' => $pager]);
+        return view('admin.usermanage', ['userList' => $pager]);
     }
 
     /**
@@ -39,10 +39,10 @@ class HomeController extends Controller {
      */
     public function userAction(Request $request, AdminLogic $logic):object {
         $data = $request->all();
-        $rules = ['uid' => ['required', 'string'], 'is_blacklist' => ['required', 'string']];
+        $rules = ['uid' => ['required', 'string'], 'isBlacklist' => ['required', 'string']];
         $request->validate($rules);
-        $res = $logic->updateUsers(array_merge($data, ['action_user' => Auth::guard('admin')->user()->name]));
-        if ($res) {
+        $res = $logic->updateUsers(array_merge($data, ['actionUser' => Auth::guard('admin')->user()->name]));
+        if ($res['status'] == 0) {
             return response()->json(['msg' => "修改数据成功", 'code' => 200]);
         } else {
             return response()->json(['msg' => "修改数据失败", 'code' => 501]);

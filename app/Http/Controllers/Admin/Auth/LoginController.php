@@ -22,14 +22,14 @@ class LoginController extends Controller {
      * @param AdminLoginRequest $login_request
      * @return type
      */
-    public function postLogin(AdminLoginRequest $login_request) {
-        $data = $login_request->only('name', 'password');
+    public function postLogin(AdminLoginRequest $loginRequest) {
+        $data = $loginRequest->only('name', 'password');
         $result = Auth::guard('admin')->attempt($data, true);
         if ($result) {
             return redirect(route('admin.home'));
         } else {
             return redirect()->back()
-                            ->with('name', $login_request->get('name'))
+                            ->with('name', $loginRequest->get('name'))
                             ->withErrors(['name' => '用户名或密码错误']);
         }
     }

@@ -23,8 +23,8 @@ class AdminLogic {
      * @param array $data
      * @return type
      */
-    protected function validatorParams(array $data) {
-        if (!isset($data['action_user']) || $data['action_user'] != 'admin') {
+    protected function validatorParams(array $data):bool {
+        if (!isset($data['actionUser']) || $data['actionUser'] != 'admin') {
             $this->error = '修改用户必须管理操作';
             return false;
         }
@@ -40,7 +40,7 @@ class AdminLogic {
      * 处理首页留言数据
      * @return type
      */
-    public function handle() {
+    public function handle():object {
         //获取数据
         $model = Users::select('*');
         return $model;
@@ -53,7 +53,7 @@ class AdminLogic {
         if (!$this->validatorParams($params)) {
             return ['status' => 401, 'msg' => $this->error];
         }
-        $update = Users::where('id', '=', $params['uid'])->update(array('is_blacklist' => $params['is_blacklist']));
+        $update = Users::where('id', '=', $params['uid'])->update(array('is_blacklist' => $params['isBlacklist']));
         if ($update) {
             return ['status' => 0, 'msg' => 'suc'];
         } else {

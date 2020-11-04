@@ -12,13 +12,13 @@ class TimeFormatService {
      * @param $time  留言时间
      */
     public static function timestampToStr($time):string {
-        $message_time = strtotime($time);
+        $timestamp = strtotime($time);
         $now = time();
-        $differ = $now - $message_time;
+        $differ = $now - $timestamp;
         $return = '';
         if ($differ < (60 * 60)) {
-            $min_differ = floor($differ / 60);
-            if ($min_differ == 0) {
+            $minDiffer = floor($differ / 60);
+            if ($minDiffer == 0) {
                 $return = '刚刚';
             } else {
                 $return = floor($differ / 60) . '分钟前';

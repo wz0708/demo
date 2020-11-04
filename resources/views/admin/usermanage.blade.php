@@ -19,7 +19,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach($userlist as $key=>$val)
+                        @foreach($userList as $key=>$val)
                         <tr>
                             <td>{{$val -> name}}</td>
                             <td>{{$val -> email}}</td>
@@ -33,7 +33,7 @@
                 </table>                    
 
 
-                {!! $userlist->links()!!}
+                {!! $userList->links()!!}
 
 
 
@@ -48,9 +48,9 @@
     $(function () {
         $('.btn-action').on('click', function () {
             if ($(this).hasClass('ban')) {
-                var is_blacklist = 1;
+                var isBlacklist = 1;
             } else {
-                var is_blacklist = 0;
+                var isBlacklist = 0;
             }
 
             var uid = $(this).data('uid');
@@ -63,7 +63,7 @@
                 },
                 data: {
                     "uid": uid,
-                    "is_blacklist": is_blacklist,
+                    "isBlacklist": isBlacklist,
                 },
                 success: function (data) {
                     if (data.code == '200') {
